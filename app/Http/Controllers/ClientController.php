@@ -13,7 +13,7 @@ class ClientController extends Controller
     protected $default_per_page = 10;
 
     /**
-     * cria client
+     * cria cliente válido
      *
      * @param Request $request  Requisição
      * @return void
@@ -74,7 +74,7 @@ class ClientController extends Controller
     }
 
     /**
-     * exibe cliente
+     * exibe as informações do cliente
      *
      * @param string $id  identificador do cliente
      * @return void
@@ -95,7 +95,7 @@ class ClientController extends Controller
     }
 
     /**
-     * atualiza um cliente
+     * atualiza os dados do cliente
      *
      * @param Request $request  Requisição
      * @param string $id  identificador do cliente
@@ -156,7 +156,7 @@ class ClientController extends Controller
     /**
      * deleta cliente
      *
-     * @param Request $request  Requisição
+     * @param string $id Identificador do cliente
      * @return void
      */
     public function delete(string $id)
