@@ -31,3 +31,8 @@ $router->group(['prefix' => 'transactions'], function () use ($router) {
     $router->post('/', 'TransactionController@create');
     $router->post('/{id}', 'TransactionController@refound');
 });
+
+$router->group(['prefix' => 'wallets'], function () use ($router) {
+    $router->get('/{id}', 'WalletController@show');
+    $router->post('/', 'WalletController@create');
+});
