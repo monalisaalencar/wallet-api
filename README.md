@@ -1,24 +1,56 @@
-# Lumen PHP Framework
+# Wallet-api
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
 
-## Official Documentation
+## Tecnologias
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+- [Lumen 8](https://lumen.laravel.com/docs/8.x)
+- [Lumen Generator](https://github.com/flipboxstudio/lumen-generator)
+- [MongoDB](https://www.mongodb.com/) com [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb)
+- [PHPUnit](https://phpunit.de)
+- [Docker](https://www.docker.com/) com [compose](https://docs.docker.com/compose/)
 
-## Contributing
+## Instruções
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Antes de prosseguir, tenha certeza de ter o [docker](https://docs.docker.com/) devidamente instalado
+e configurado em sua máquina, juntamente com o [compose](https://docs.docker.com/compose).
 
-## Security Vulnerabilities
+### Instalação
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+1. Baixe o projeto com git ou faça o download manualmente.
 
-## License
+```bash
+git clone https://github.com/monalisaalencar/wallet-api.git && cd wallet-api
+```
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. Copie o arquivo `.env.example` e o renomeie para `.env`
+
+```bash
+cp .env.example .env
+```
+
+3. Suba o projeto utilizando `docker-compose`
+
+```bash
+docker-compose up -d
+```
+
+4. Instale as dependências
+
+```bash
+docker exec wallet_api composer install
+```
+
+Para prosseguir com os testes, devemos realizar a configuração completa do banco. Veja na próxima seção.
+
+### Configuração do Banco
+
+As variáveis de ambiente já estão configuradas no .env.example
+
+### Testes
+
+execute os testes dentro do container da API.
+
+```
+docker exec wallet_api vendor/bin/phpunit
+```
