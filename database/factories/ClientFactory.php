@@ -23,7 +23,7 @@ class ClientFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'type' => $this->faker->randomElement(['common', 'shopkeeper']),
+            'type' => $this->faker->randomElement(['common', 'merchant']),
             'cpf_cnpj' => (string)$this->faker->randomNumber(),
             'email_address' => $this->faker->email(),
             'password' => $this->faker->md5()

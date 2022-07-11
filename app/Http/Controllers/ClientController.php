@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 
 class ClientController extends Controller
 {
-    const TYPE_VALID_CLIENT = ['common', 'shopkeeper'];
+    const TYPE_VALID_CLIENT = ['common', 'merchant'];
     protected $default_per_page = 10;
 
     /**
@@ -66,7 +66,7 @@ class ClientController extends Controller
         }
 
         if (($request->type == 'common' && !validate_cpf($request->cpf_cnpj))
-            || ($request->type == 'shopkeeper' && !validate_cnpj($request->cpf_cnpj))) {
+            || ($request->type == 'merchant' && !validate_cnpj($request->cpf_cnpj))) {
             return response([
                 'message' => 'CPF/CNPJ Inválido'
             ], 400)->throwResponse();

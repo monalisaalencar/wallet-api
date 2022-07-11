@@ -19,7 +19,7 @@ trait CreateProviders
             'cpf_cnpj require' => [
                 'payload' => [
                         'name' => 'Test Test',
-                        'type' => 'shopkeeper',
+                        'type' => 'merchant',
                         'email_address' => 'teste@test.com',
                         'password' => '123456'
                 ],
@@ -38,7 +38,7 @@ trait CreateProviders
                 'payload' => [
                         'name' => 'Test Test',
                         'cpf_cnpj' => '00824037000134',
-                        'type' => 'shopkeeper',
+                        'type' => 'merchant',
                         'password' => '123456'
                 ],
                 'status' => 422,
@@ -57,7 +57,7 @@ trait CreateProviders
                 'payload' => [
                         'name' => 'Test Test',
                         'cpf_cnpj' => '00824037000134',
-                        'type' => 'shopkeeper',
+                        'type' => 'merchant',
                         'email_address' => 'testes@test.com',
                 ],
                 'status' => 422,
@@ -66,7 +66,7 @@ trait CreateProviders
                 'payload' => [
                         'name' => 'Test Test',
                         'cpf_cnpj' => '00824037000134',
-                        'type' => 'shopkeeper',
+                        'type' => 'merchant',
                         'email_address' => 'testes@test.com',
                         'password' => '123456'
                 ],
@@ -82,7 +82,7 @@ trait CreateProviders
                 'payload' => [
                         'name' => 'Monalisa Alencar',
                         'cpf_cnpj' => '11111111111512',
-                        'type' => 'shopkeeper',
+                        'type' => 'merchant',
                         'email_address' => 'teste@test.com',
                         'password' => '123456'
                 ],
@@ -104,7 +104,7 @@ trait CreateProviders
                 'payload' => [
                         'name' => 'Monalisa Alencar',
                         'cpf_cnpj' => '00824037000134',
-                        'type' => 'shopkeeper',
+                        'type' => 'merchant',
                         'email_address' => 'teste@test.com',
                         'password' => '123456'
                 ],
