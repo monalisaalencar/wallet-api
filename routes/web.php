@@ -24,3 +24,10 @@ $router->group(['prefix' => 'clients'], function () use ($router) {
     $router->put('/{id}', 'ClientController@update');
     $router->delete('/{id}', 'ClientController@delete');
 });
+
+$router->group(['prefix' => 'transactions'], function () use ($router) {
+    $router->get('/', 'TransactionController@index');
+    $router->get('/{id}', 'TransactionController@show');
+    $router->post('/', 'TransactionController@create');
+    $router->post('/{id}', 'TransactionController@refound');
+});
