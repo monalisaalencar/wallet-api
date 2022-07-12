@@ -77,7 +77,7 @@ class TransactionController extends Controller
             ], 400)->throwResponse();
         }
 
-        $response = authenticationRequest('GET', '', []);
+        $response = authorizationRequest('GET', '', []);
 
         if ($response['status'] != 200) {
             return response([
@@ -94,10 +94,15 @@ class TransactionController extends Controller
      * @param double $total_value  valor da transação
      * @return void
      */
-    private function applyValueTrasaction($wallet_payer, $wallet_payee, $total_value)
+    private function applyValueTrasaction($wallet_payer, $wallet_payee, $total_value, $refound = false)
     {
-        $wallet_payer->balance_value -= $total_value;
-        $wallet_payee->balance_value += $total_value;
+        if ($refound) {
+            $wallet_payer->balance_value += $total_value;
+            $wallet_payee->balance_value -= $total_value;
+        } else {
+            $wallet_payer->balance_value -= $total_value;
+            $wallet_payee->balance_value += $total_value;
+        }
 
         $wallet_payee->save();
         $wallet_payer->save();
@@ -178,14 +183,7 @@ class TransactionController extends Controller
         ->with('wallet')
         ->first();
 
-        $wallet_payee = $payee->wallet;
-        $wallet_payer = $payer->wallet;
-
-        $wallet_payer->balance_value += $transaction->total_value;
-        $wallet_payee->balance_value -= $transaction->total_value;
-
-        $wallet_payee->save();
-        $wallet_payer->save();
+        $this->applyValueTrasaction($payer->wallet, $payee->wallet, $transaction->total_value, true);
 
         $transaction->delete();
 
