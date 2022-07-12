@@ -103,6 +103,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->validate($request, [
+            'name' => 'string',
+            'email_address' => 'email',
+            'password' => 'string',
+            'type' => 'string',
+            'cpf_cnpj' => 'string'
+        ]);
+
         $client = Client::where('_id', $id)->first();
 
         if (!$client) {
