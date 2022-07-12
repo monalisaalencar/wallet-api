@@ -2,8 +2,8 @@
 
 use GuzzleHttp\Client as GuzzleClient;
 
-if (!function_exists('authenticationRequest')) {
-    function authenticationRequest($request, $route, $body)
+if (!function_exists('authorizationRequest')) {
+    function authorizationRequest($request, $route, $body)
     {
         $client = new GuzzleClient([
             'base_uri' => env('AUTHENTICATION_ENDPOINT'),
