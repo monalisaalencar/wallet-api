@@ -5,7 +5,6 @@
 ## Tecnologias
 
 - [Lumen 8](https://lumen.laravel.com/docs/8.x)
-- [Lumen Generator](https://github.com/flipboxstudio/lumen-generator)
 - [MongoDB](https://www.mongodb.com/) com [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb)
 - [PHPUnit](https://phpunit.de)
 - [Docker](https://www.docker.com/) com [compose](https://docs.docker.com/compose/)
