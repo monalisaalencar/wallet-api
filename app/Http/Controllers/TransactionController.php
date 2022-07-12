@@ -39,16 +39,9 @@ class TransactionController extends Controller
             'total_value' => $request['total_value']
         ]);
 
-        $wallet_payee = $payee->wallet;
-        $wallet_payer = $payer->wallet;
+        $this->applyValueTrasaction($payer->wallet, $payee->wallet, $request->total_value);
 
-        $wallet_payer->balance_value -= $request->total_value;
-        $wallet_payee->balance_value += $request->total_value;
-
-        $wallet_payee->save();
-        $wallet_payer->save();
-
-        //notificationRequest('GET', '', []);
+        notificationRequest('GET', '', []);
 
         return response([
             'transaction' => [
@@ -72,7 +65,7 @@ class TransactionController extends Controller
             'total_value' => 'required',
         ]);
 
-        if (empty($payer) || $payer->type == 'shopkeeper') {
+        if (empty($payer) || $payer->type == 'merchant') {
             return response([
                 'message' => 'Usuário indisponível para realização de tranferência!',
             ], 400)->throwResponse();
@@ -84,13 +77,30 @@ class TransactionController extends Controller
             ], 400)->throwResponse();
         }
 
-        // $response = authenticationRequest('GET', '', []);
+        $response = authenticationRequest('GET', '', []);
 
-        // if ($response['status'] != 200) {
-        //     return response([
-        //         'message' => 'Transação não autorizado',
-        //     ], 400)->throwResponse();
-        // }
+        if ($response['status'] != 200) {
+            return response([
+                'message' => 'Transação não autorizado',
+            ], 400)->throwResponse();
+        }
+    }
+
+    /**
+     * atualiza a carteira dos clientes com o valor da transação
+     *
+     * @param collect $wallet_payer  carteira do pagador
+     * @param collect $wallet_payee  carteira do beneficiário
+     * @param double $total_value  valor da transação
+     * @return void
+     */
+    private function applyValueTrasaction($wallet_payer, $wallet_payee, $total_value)
+    {
+        $wallet_payer->balance_value -= $total_value;
+        $wallet_payee->balance_value += $total_value;
+
+        $wallet_payee->save();
+        $wallet_payer->save();
     }
 
     /**
