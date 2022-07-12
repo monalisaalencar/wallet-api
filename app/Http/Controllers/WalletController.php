@@ -15,6 +15,11 @@ class WalletController extends Controller
      */
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'client_id' => 'required|string',
+            'balance_value' => 'required|numeric',
+        ]);
+
         $new_wallet = Wallet::create([
             'client_id' => $request['client_id'],
             'balance_value' => $request['balance_value']
