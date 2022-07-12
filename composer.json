@@ -27,7 +27,7 @@
             "app/Helpers/validateCPF.php",
             "app/Helpers/validateCNPJ.php",
             "app/Helpers/NotificationRequest.php",
-            "app/Helpers/AuthenticationRequest.php"
+            "app/Helpers/AuthorizationRequest.php"
         ]
     },
     "autoload-dev": {
