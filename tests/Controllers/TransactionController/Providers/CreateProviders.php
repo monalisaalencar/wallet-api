@@ -10,14 +10,14 @@ trait CreateProviders
             'total value require' => [
                 'payload' => [
                         'payer_id' => '62cb68c9b18d8913e226f1eq',
-                        'payer_id' => '62cb68c9b18d8913e226f1eq',
+                        'payee_id' => '62cb68c9b18d8913e226f1eq',
                 ],
                 'status' => 422,
             ],
             'payer_id require' => [
                 'payload' => [
                     'total_value' => '84002695000',
-                    'payer_id' => '62cb68c9b18d8913e226f1eq',
+                    'payee_id' => '62cb68c9b18d8913e226f1eq',
                 ],
                 'status' => 422,
             ],
