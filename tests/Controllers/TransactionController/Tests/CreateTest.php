@@ -24,7 +24,7 @@ class CreateTest extends TestCase
      * @test
      * @dataProvider payload
      */
-    public function createInvalid($payload, $status)
+    public function createInvalidPayload($payload, $status)
     {
         $this->json(
             $this->http_verb,
@@ -35,53 +35,54 @@ class CreateTest extends TestCase
         $this->assertResponseStatus($status);
     }
 
-    // /**
-    //  * @test
-    //  */
-    // public function createValidd()
-    // {
-    //     $payer = Client::factory()->create([
-    //         'type' => 'common'
-    //     ]);
-    //     $payee = Client::factory()->create([
-    //         'type' => 'shopkeeper'
-    //     ]);
+    /**
+     * @test
+     */
+    public function createWithValuesValid()
+    {
+        $payer = Client::factory()->create([
+            'type' => 'common'
+        ]);
+        $payee = Client::factory()->create([
+            'type' => 'merchant'
+        ]);
 
-    //     Wallet::factory()->create([
-    //         'balance_value' => 10000,
-    //         'client_id' => $payer->_id
-    //     ]);
+        Wallet::factory()->create([
+            'balance_value' => 10000,
+            'client_id' => $payee->_id
+        ]);
 
-    //     $wallet_payee = Wallet::factory()->create([
-    //         'balance_value' => 10000,
-    //         'client_id' => $payer->_id
-    //     ]);
+        Wallet::factory()->create([
+            'balance_value' => 10000,
+            'client_id' => $payer->_id
+        ]);
 
-    //     $payload = [
-    //         "total_value" => 100,
-    //         "payer_id" => $payer->_id,
-    //         "payee_id" => $payee->_id
-    //     ];
+        $payload = [
+            "total_value" => 100,
+            "payer_id" => $payer->_id,
+            "payee_id" => $payee->_id
+        ];
 
-    //     $this->json(
-    //         $this->http_verb,
-    //         $this->route,s
-    //         $payload,
-    //     );
+        $this->json(
+            $this->http_verb,
+            $this->route,
+            $payload,
+        );
 
-    //     $this->assertResponseOk();
+        $this->assertResponseOk();
 
-    //     $wallet_payer = Wallet::where('client_id', $payer->_id)->first();
-    //     $this->assertEquals(10000 - $payload['total_value'], $wallet_payer->balance_value);
+        $wallet_payer = Wallet::where('client_id', $payer->_id)->first();
+        $this->assertEquals(10000 - $payload['total_value'], $wallet_payer->balance_value);
 
-    //     $wallet_payee = Wallet::where('client_id', $payee->_id)->first();
-    //     $this->assertEquals(10000 + $payload['total_value'], $wallet_payee->balance_value);
+        $wallet_payee = Wallet::where('client_id', $payee->_id)->first();
+        $this->assertEquals(10000 + $payload['total_value'], $wallet_payee->balance_value);
 
-    //     $payer->forceDelete();
-    //     $payee->forceDelete();
-    //     $wallet_payer->forceDelete();
-    //     $wallet_payee->forceDelete();
-    // }
+        $payer->forceDelete();
+        $payee->forceDelete();
+        $wallet_payer->forceDelete();
+        $wallet_payee->forceDelete();
+        Transaction::where('payer_id', $payer->_id)->where('payee_id', $payee->_id)->forceDelete();
+    }
 
     function tearDown(): void
     {
